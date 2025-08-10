@@ -61,11 +61,9 @@ number_of_tweets = st.number_input("Number of Tweets", min_value=1, max_value=10
 
 
 if st.button("Generate Tweets"):
-    with st.container():
-        st.write("Tweets will be generated here...")
-        tweets = tweet_chain.invoke({"topic": topic, "number_of_tweets": number_of_tweets})
-        st.markdown(f"<div style='background-color: #f8f9fa; padding: 20px; border-radius: 10px;'>{tweets.content}</div>", 
-                  unsafe_allow_html=True)
+    st.write("Tweets will be generated here...")
+    tweets=tweet_chain.invoke({"topic": topic, "number_of_tweets": number_of_tweets})
+    st.write(tweets.content)
 
 
 
