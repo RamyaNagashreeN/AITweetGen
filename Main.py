@@ -1,13 +1,14 @@
-#Backend code to use Google Gemini for generating tweets
 import os
-
-os.environ['GOOGLE_API_KEY']  = st.secrets['GOOGLE_API_KEY']
 
 #Using Google Models
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain import LLMChain
 from langchain import PromptTemplate
 
+#Frontend
+import streamlit as st
+
+#Backend code to use Google Gemini for generating tweets
 tweet_template = PromptTemplate(
     input_variables=["topic", "number_of_tweets"],
     template="Generate {number_of_tweets} tweets on the topic: {topic}"
@@ -19,9 +20,10 @@ gemini_model = ChatGoogleGenerativeAI(model = "gemini-1.5-flash-latest")
 
 tweet_chain=tweet_template | gemini_model
 
+os.environ['GOOGLE_API_KEY']  = st.secrets['GOOGLE_API_KEY']
+
 
 #Frontend code
-import streamlit as st
 
 # Custom theme configuration
 st.set_page_config(
